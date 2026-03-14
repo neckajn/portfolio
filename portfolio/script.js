@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "contact-tab": document.getElementById("contact-content")
   };
 
-  // Cover animation
   cover.addEventListener("mouseenter", function () {
     if (!cover.classList.contains("cover-active")) {
       cover.classList.add("cover-active");
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Tab switching
   tabs.forEach(tab => {
     tab.addEventListener("click", function () {
       tabs.forEach(t => t.classList.remove("tab-active"));
@@ -29,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
       tab.classList.add("tab-active");
       contents[tab.id]?.classList.add("content-active");
 
-      // 🛠 Hide all modals on tab switch
       document.querySelectorAll('.modal').forEach(modal => {
         modal.style.display = 'none';
       });
@@ -40,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Flip cards (if any)
   document.querySelectorAll('.card-wrapper').forEach(wrapper => {
     wrapper.addEventListener('click', () => {
       const inner = wrapper.querySelector('.flip-inner');
@@ -55,17 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Default tab
   document.getElementById("about-tab").click();
 
-  // === MODAL LOGIC ===
   document.querySelectorAll('.project-cta').forEach(button => {
     button.addEventListener('click', () => {
       const modalId = button.getAttribute('data-modal');
       const modal = document.getElementById(modalId);
       modal.style.display = 'flex';
 
-      // Set up carousel when modal opens
       const carouselImages = modal.querySelector('.carousel-images');
       const images = modal.querySelectorAll('.carousel-images img');
       const prevBtn = modal.querySelector('.prev');
@@ -74,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!carouselImages || images.length === 0) return;
 
-      // Reset widths (needed if reused)
       carouselImages.style.width = `${100 * images.length}%`;
       images.forEach(img => {
         img.style.width = `${100 / images.length}%`;
@@ -95,11 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCarousel();
       });
 
-      updateCarousel(); // show initial image
+      updateCarousel();
     });
   });
 
-  // Close modals
   document.querySelectorAll('.modal .close').forEach(close => {
     close.addEventListener('click', () => {
       close.closest('.modal').style.display = 'none';
